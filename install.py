@@ -12,7 +12,6 @@ usage: python3 install.sh <install-path>
 
 # generate bash function to create a comp prog dir with Makefile 
 gen_func = f'''
-#!/usr/bin/env bash
 COMPTEST_PATH={os.getenv("PWD")}
 generate_compdir() {{
   mkdir "$1"
@@ -26,18 +25,21 @@ home_prefix = os.getenv("HOME")
 sh_configs = [f"{home_prefix}/.zshrc", 
               f"{home_prefix}/.bashrc"]
 
-source_command = "source .gen.sh"
+    
+compgen_script = ".compgen.sh"
+
+source_command = f"source {os.getenv("HOME")}/{compgen_script}\n"
 
 def write_to_shell_configs():
   for config in sh_configs:
-    with open(config, "a") as c:
+    with open(config, "r+") as c:
       content = c.read()
-      if not source_command in content:
+      if source_command not in content:
         c.write(source_command)
 
 def link_exe_to_PATH(install_path):
   try:
-    subprocess.run(["ln", "-sf", f"{os.getenv("PWD")}/comptest.py", f"{install_path}/comptest"],
+    subprocess.run(["sudo", "ln", "-sf", f"{os.getenv("PWD")}/comptest.py", f"{install_path}/comptest"],
                     stdout=None, 
                     stdin=None,
                     stderr=subprocess.STDOUT,
@@ -54,9 +56,9 @@ def main():
 
   install_path = sys.argv[1]
   link_exe_to_PATH(install_path)
+  write_to_shell_configs()
 
-  #write_to_shell_configs()
-  with open(".compgen.sh", "w") as gen:
+  with open(f"{compgen_script}", "w") as gen:
     gen.writelines(gen_func)
 
 
