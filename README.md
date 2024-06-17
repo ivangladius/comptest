@@ -34,3 +34,20 @@ directory structure:
 8 5
 10 9 8 7 7 7 5 5
 ```
+### expected_file 
+#### the expected output for your problem, paste it into the file
+```
+8 2
+```
+### testing
+```
+make
+```
+if it passes, green text: 
+```
+pass!
+```
+if it fails, red text: 
+```
+fail!
+```
