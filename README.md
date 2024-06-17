@@ -43,11 +43,11 @@ directory structure:
 ```
 make
 ```
-if it passes, green text: 
+if it **passes**, green text: 
 ```
 pass!
 ```
-if it fails, red text: 
+if it **fails**, red text: 
 ```
 fail!
 ```
