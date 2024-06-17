@@ -7,6 +7,14 @@ https://github.com/ivangladius/comptest.git
 cd comptest
 python3 install.py /usr/local/bin
 ```
+source your shell script: 
+```
+  source ~/.zshrc
+```
+or 
+```
+  source ~/.bashrc
+```
 ### usage 
 ```
 compgen mydir
