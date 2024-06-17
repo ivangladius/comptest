@@ -28,7 +28,9 @@ directory structure:
 └── sol.cpp
 ```
 
-#### input_file 
-##### the input for your problem, paste it into the file
+### input_file 
+#### the input for your problem, paste it into the file
+```
 8 5
 10 9 8 7 7 7 5 5
+```
