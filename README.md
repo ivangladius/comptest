@@ -56,5 +56,12 @@ if it **fails**, red text:
 >
 failed!
 ```
+### Makefile
+just change **sol** to any filename you link
+```
+...
+NAME = sol
+...
+```
 ### TODO
 more detailed test fail output
