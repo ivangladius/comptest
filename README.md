@@ -49,5 +49,10 @@ pass!
 ```
 if it **fails**, red text: 
 ```
-fail!
+1c1,2
+< 3
+---
+> 4
+>
+failed!
 ```

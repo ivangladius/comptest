@@ -58,6 +58,7 @@ def main():
                              capture_output=True,
                              text=True)
     if result.returncode != 0:
+        print(result.stdout)
         print("\033[31mfailed!\033[0m")
     else:
         print("\033[32mPass!\033[0m")
