@@ -1,9 +1,9 @@
 
 COMPTEST = comptest
-TESTFILE = testfile
+TESTFILE = test-file
 NAME = sol
 
 all: $(NAME).cpp
 	@g++ -g -o $(NAME) $(NAME).cpp
-	@$(COMPTEST) $(PWD) $(NAME) testfile
+	@$(COMPTEST) $(PWD) $(NAME) $(TESTFILE)
 	
