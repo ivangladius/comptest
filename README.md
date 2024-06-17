@@ -57,7 +57,7 @@ if it **fails**, red text:
 failed!
 ```
 ### Makefile
-just change **sol** to any filename you link
+just change **sol** to any filename you like, or leave default
 ```
 ...
 NAME = sol
