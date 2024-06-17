@@ -1,7 +1,7 @@
 
 ## Competetive Programming Tool
  Create and Test very efficient Competetive Programming environments 
-### installation: 
+### installation (*Nix and MacOS only)
 ```
 https://github.com/ivangladius/comptest.git
 cd comptest
