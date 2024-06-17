@@ -11,8 +11,8 @@ python3 install.py /usr/local/bin
 ```
 compgen mydir
 cd mydir
-```
 ├── Makefile
 ├── expected_file
 ├── input_file
 └── sol.cpp
+```
