@@ -18,10 +18,10 @@ or
 ### usage 
 ```
 compgen mydir
+cd mydir
 ```
 directory structure:
 ```
-cd mydir
 ├── Makefile
 ├── expected_file
 ├── input_file
