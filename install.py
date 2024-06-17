@@ -21,8 +21,8 @@ TEMPLATE_CONTENT="{get_cpp_template()}"
 generate_compdir() {{
   mkdir "$1"
   cp "$COMPTEST_PATH"/Makefile "$1"/Makefile
-  touch "$1"/test_file
   touch "$1"/input_file
+  touch "$1"/expected_file
   echo "$TEMPLATE_CONTENT" > "$1"/sol.cpp
 }}
 alias compgen='generate_compdir'

@@ -6,7 +6,7 @@ from pathlib import Path
 
 def usage():
     usage_string = """
-    usage: ./comptest <directory> <executable> <testcases>
+    usage: ./comptest <directory> <executable> <input_file>
   """
     print(usage_string)
 
@@ -18,11 +18,11 @@ def main():
 
     cwd = Path(sys.argv[1])
     executable = cwd / sys.argv[2]
-    testfile = cwd / sys.argv[3]
+    inputfile = cwd / sys.argv[3]
     # read all test cases from testfile
     # test cases are seperated by a empty line
     test_cases = []
-    with open (testfile, "r") as tf:
+    with open (inputfile, "r") as tf:
         test = ""
         last_line_was_space = False
         for line in tf:
@@ -54,7 +54,7 @@ def main():
     with open("output_file", "w") as out:
         out.write(buffer)
 
-    result = subprocess.run(["diff", "-B", "-w", "output_file", "input_file"],
+    result = subprocess.run(["diff", "-B", "-w", "output_file", "expected_file"],
                              capture_output=True,
                              text=True)
     if result.returncode != 0:
