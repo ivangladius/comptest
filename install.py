@@ -40,10 +40,13 @@ compgen_script = ".compgen.sh"
 
 def append_to_shell_configs(source_command):
   for config in sh_configs:
-    with open(config, "r+") as c:
-      content = c.read()
-      if source_command not in content:
-        c.write(source_command)
+    try:
+      with open(config, "r+") as c:
+        content = c.read()
+        if source_command not in content:
+          c.write(source_command)
+    except FileNotFoundError as e:
+      pass
 
 def install_at(install_path):
   try:
