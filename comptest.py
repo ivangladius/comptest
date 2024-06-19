@@ -17,10 +17,10 @@ def remove_newlines_and_compare(file1, file2):
     RESET = '\033[0m'
 
     try:
-        # Read files and remove newlines
+        # Read files and remove only newlines
         with open(file1, 'r') as f1, open(file2, 'r') as f2:
-            lines1 = [''.join(line.strip('\n')) for line in f1]
-            lines2 = [''.join(line.strip('\n')) for line in f2]
+            lines1 = [''.join(line.rstrip('\n')) for line in f1 if line.rstrip('\n') != '']
+            lines2 = [''.join(line.rstrip('\n')) for line in f2 if line.rstrip('\n') != '']
 
         # Compare line by line
         differences = []
@@ -28,7 +28,7 @@ def remove_newlines_and_compare(file1, file2):
             if line1 != line2:
                 differences.append((i + 1, line1, line2))
 
-        # Check for extra lines only if differences are found
+        # Check for extra lines only if differences are found or lengths differ
         if differences or len(lines1) != len(lines2):
             print(f"{RED}Fail{RESET}")
             print("Differences:")
@@ -41,11 +41,11 @@ def remove_newlines_and_compare(file1, file2):
             if len(lines1) > len(lines2):
                 print(f"Additional lines in output_file:")
                 for i in range(len(lines2), len(lines1)):
-                    print(f"    Line {i + 1}: {RED}{repr(lines1[i])}{RESET}")
+                    print(f"    Line {len(lines2) + i + 1}: {RED}{repr(lines1[len(lines2) + i])}{RESET}")
             elif len(lines2) > len(lines1):
                 print(f"Additional lines in expected_file:")
                 for i in range(len(lines1), len(lines2)):
-                    print(f"    Line {i + 1}: {GREEN}{repr(lines2[i])}{RESET}")
+                    print(f"    Line {len(lines1) + i + 1}: {GREEN}{repr(lines2[len(lines1) + i])}{RESET}")
         else:
             print(f"{GREEN}Pass{RESET}")
 
