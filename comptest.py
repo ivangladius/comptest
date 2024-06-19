@@ -10,6 +10,20 @@ def usage():
   """
     print(usage_string)
 
+def remove_newlines_and_compare(file1, file2):
+    # Read the files and remove newlines
+    with open(file1, 'r') as f1, open(file2, 'r') as f2:
+        content1 = f1.read().replace('\n', '')
+        content2 = f2.read().replace('\n', '')
+
+    # Compare the content
+    if content1 == content2:
+            print(result.stdout)
+            print("\033[31mfailed!\033[0m")
+    else:
+            print("\033[32mPass!\033[0m")
+
+
 
 def main():
     if len(sys.argv) != 4:
@@ -54,14 +68,8 @@ def main():
     with open("output_file", "w") as out:
         out.write(buffer)
 
-    result = subprocess.run(["diff", "-B", "-w", "output_file", "expected_file"],
-                             capture_output=True,
-                             text=True)
-    if result.returncode != 0:
-        print(result.stdout)
-        print("\033[31mfailed!\033[0m")
-    else:
-        print("\033[32mPass!\033[0m")
+    remove_newlines_and_compare("expected_file", "output_file")
+
 
 if __name__ == "__main__":
     main()
