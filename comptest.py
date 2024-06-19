@@ -35,8 +35,8 @@ def remove_newlines_and_compare(file1, file2):
             print("Differences:")
             for diff in differences:
                 print(f"Line {diff[0]} differs:")
-                print(f"    Output: {RED}{repr(diff[1])}{RESET}")
-                print(f"    Expected: {GREEN}{repr(diff[2])}{RESET}")
+                print(f"    Expected: {RED}{repr(diff[1])}{RESET}")
+                print(f"    Output: {GREEN}{repr(diff[2])}{RESET}")
             
             # If one file has more lines than the other
             if len(lines1) > len(lines2):
