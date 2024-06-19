@@ -47,7 +47,8 @@ def append_to_shell_configs(source_command):
 
 def install_at(install_path):
   try:
-    subprocess.run(["sudo", "ln", "-sf", f"{os.getenv("PWD")}/comptest.py", f"{install_path}/comptest"],
+    pwd = os.getenv("PWD")
+    subprocess.run(["sudo", "ln", "-sf", f"{pwd}/comptest.py", f"{install_path}/comptest"],
                     stdout=None, 
                     stdin=None,
                     stderr=subprocess.STDOUT,
@@ -65,10 +66,10 @@ def main():
   install_path = sys.argv[1]
   install_at(install_path)
 
-  source_command = f"source {os.getenv("HOME")}/{compgen_script}\n"
+  source_command = f"source {home_prefix}/{compgen_script}\n"
   append_to_shell_configs(source_command)
 
-  with open(f"{os.getenv("HOME")}/{compgen_script}", "w") as gen:
+  with open(f"{home_prefix}/{compgen_script}", "w") as gen:
     gen.write(gen_func)
 
 
