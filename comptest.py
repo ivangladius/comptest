@@ -11,18 +11,33 @@ def usage():
     print(usage_string)
 
 def remove_newlines_and_compare(file1, file2):
-    # Read the files and remove newlines
-    with open(file1, 'r') as f1, open(file2, 'r') as f2:
-        content1 = f1.read().replace('\n', '')
-        content2 = f2.read().replace('\n', '')
+    # ANSI color codes for green and red
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+    
+    try:
+        # Read the files and remove only newlines
+        with open(file1, 'r') as f1, open(file2, 'r') as f2:
+            content1 = ''.join(line.strip('\n') for line in f1)
+            content2 = ''.join(line.strip('\n') for line in f2)
 
-    # Compare the content
-    if content1 == content2:
-            print(result.stdout)
-            print("\033[31mfailed!\033[0m")
-    else:
-            print("\033[32mPass!\033[0m")
+        # Compare the content
+        if content1 == content2:
+            print(f"{GREEN}Pass{RESET}")
+        else:
+            print(f"{RED}Fail{RESET}")
+            # Optional: Show differences
+            for i, (c1, c2) in enumerate(zip(content1, content2)):
+                if c1 != c2:
+                    print(f"Difference at character {i}: '{c1}' vs '{c2}'")
+            print(f"Content of file1: {content1}")
+            print(f"Content of file2: {content2}")
 
+    except FileNotFoundError as e:
+        print(f"{RED}Error: {e}{RESET}")
+    except Exception as e:
+        print(f"{RED}An unexpected error occurred: {e}{RESET}")
 
 
 def main():
