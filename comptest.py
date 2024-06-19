@@ -10,12 +10,12 @@ def usage():
   """
     print(usage_string)
 
-GREEN = '\033[92m'
-RED = '\033[91m'
-RESET = '\033[0m'
-
 def remove_newlines_and_compare(file1, file2):
     # ANSI color codes for green and red
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+
     try:
         # Read files and remove newlines
         with open(file1, 'r') as f1, open(file2, 'r') as f2:
@@ -26,27 +26,28 @@ def remove_newlines_and_compare(file1, file2):
         differences = []
         for i, (line1, line2) in enumerate(zip(lines1, lines2)):
             if line1 != line2:
-                differences.append((i+1, line1, line2))
-        
-        if not differences and len(lines1) == len(lines2):
-            print(f"{GREEN}Pass{RESET}")
-        else:
+                differences.append((i + 1, line1, line2))
+
+        # Check for extra lines only if differences are found
+        if differences or len(lines1) != len(lines2):
             print(f"{RED}Fail{RESET}")
             print("Differences:")
             for diff in differences:
                 print(f"Line {diff[0]} differs:")
-                print(f"    Expected: {RED}{repr(diff[1])}{RESET}")
-                print(f"    Output: {GREEN}{repr(diff[2])}{RESET}")
-            
+                print(f"    Output: {RED}{repr(diff[1])}{RESET}")
+                print(f"    Expected: {GREEN}{repr(diff[2])}{RESET}")
+
             # If one file has more lines than the other
             if len(lines1) > len(lines2):
                 print(f"Additional lines in output_file:")
                 for i in range(len(lines2), len(lines1)):
-                    print(f"    Line {i+1}: {RED}{repr(lines1[i])}{RESET}")
+                    print(f"    Line {i + 1}: {RED}{repr(lines1[i])}{RESET}")
             elif len(lines2) > len(lines1):
                 print(f"Additional lines in expected_file:")
                 for i in range(len(lines1), len(lines2)):
-                    print(f"    Line {i+1}: {GREEN}{repr(lines2[i])}{RESET}")
+                    print(f"    Line {i + 1}: {GREEN}{repr(lines2[i])}{RESET}")
+        else:
+            print(f"{GREEN}Pass{RESET}")
 
     except FileNotFoundError as e:
         print(f"{RED}Error: {e}{RESET}")
